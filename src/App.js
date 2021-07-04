@@ -63,14 +63,20 @@ export default class App extends Component{
   return (
     <div className="App">
       <header className="App-header">
-      <BrowserRouter>
-        <div className="headerLink">
-          <Link to="/register" className="linkStyle">Register</Link>
-        </div>
-        <Route path="/register" render={props => (
-          <Register {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
-        )} />
-      </BrowserRouter>
+        <BrowserRouter>
+          <div className="headerLink">
+            <h3>
+              <Link to="/home" className="linkStyle">Home</Link>
+              <Link to="/login" className="linkStyle">Login</Link>
+              <Link to="/register" className="linkStyle">Register</Link>
+            </h3>
+          </div>
+          <Switch>
+            <Route path="/register" render={props => (
+              <Register {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )} />
+          </Switch>
+        </BrowserRouter>
       </header>
     </div>
   );
