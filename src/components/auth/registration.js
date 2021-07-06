@@ -8,7 +8,7 @@ export default class Registration extends Component {
         this.state = {
             first_name: "",
             last_name: "",
-            user_name: "",
+            username: "",
             password: "",
             password_confirmation: "",
             registerErrors: ""
@@ -29,7 +29,7 @@ export default class Registration extends Component {
         axios.post("http://localhost:3000/registrations", {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
-            user_name: this.state.user_name,
+            username: this.state.username,
             password: this.state.password,
             password_confirmation: this.state.password_confirmation
         },
@@ -62,10 +62,10 @@ export default class Registration extends Component {
                         required 
                     />
                     <input 
-                        type="user_name" 
-                        name="user_name" 
+                        type="username" 
+                        name="username" 
                         placeholder="Username" 
-                        value={this.state.user_name} 
+                        value={this.state.username} 
                         onChange={this.handleChange} 
                         required 
                     />
