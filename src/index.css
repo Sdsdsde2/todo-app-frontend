@@ -18,8 +18,8 @@ code {
   color: white;
   background: #43464B;
   border: rgb(0, 0, 0) solid 2px;
-  width: 25rem;
-  height: 30rem;
+  width: 15rem;
+  height: 20rem;
   display: inline-grid;
   margin: 1rem 2rem;
   border-radius: 5px;
@@ -28,14 +28,28 @@ code {
 .cardTitle {
   text-align: center;
   color: white;
-  background-color: #E12B38;
+  background-color: #b62be1;
   border-bottom: rgb(0, 0, 0) solid 2px;
   border-radius: 5px;
-  font-size:18px;
+  font-size: 20px;
+  height: 5rem;
+}
+
+.cardDesc {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  margin-top: -12.5%;
+}
+
+.cardPriority {
+  text-align: center;
+  color: white;
+  font-size: 14px;
 }
 
 .cardButton {
-  background-color: #E12B38;
+  background-color: #b62be1;
   border: rgb(0, 0, 0) solid 2px;
   border-radius: 5px;
   height: 2rem;

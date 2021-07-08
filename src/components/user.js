@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
-import Login from './auth/login'
 import axios from 'axios'
 
-export default class LoginPage extends Component {
+export default class User extends Component {
     constructor(props) {
         super(props);
 
-        this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
     }
 
     handleSuccessfulAuth(data) {
         this.props.handleLogin(data);
-        this.props.history.push("/home");
+        this.props.history.push("/dash");
     }
 
     handleLogoutClick() {
@@ -22,6 +20,8 @@ export default class LoginPage extends Component {
         .catch(error => {
             console.log("logout error", error);
         });
+
+        this.props.history.push("/login");
     }
 
     logoutButton() {
@@ -32,9 +32,10 @@ export default class LoginPage extends Component {
     render() {
         return (
             <div>
-                <h1>Login</h1>
+                <h1>Account Information</h1>
+                <h3>Name: {this.props.user.first_name + ' ' + this.props.user.last_name}</h3>
+                <h3>Username: {this.props.user.username}</h3>
                 {this.logoutButton()}
-                <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
             </div>
         )
     }

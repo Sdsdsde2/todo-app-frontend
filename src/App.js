@@ -3,8 +3,10 @@ import './Header.css';
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import axios from "axios";
+import Dash from './components/dash';
 import Register from './components/register';
 import Login from './components/login';
+import User from './components/user';
 
 export default class App extends Component{
   constructor() {
@@ -12,7 +14,8 @@ export default class App extends Component{
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      user: {},
+      tasks: {}
     }
 
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
@@ -43,8 +46,17 @@ export default class App extends Component{
     .catch(error => console.log("Login error", error))
   }
 
+  fetchTasks() {
+    axios.get("http://localhost:3000/tasks")
+    .then(resp => this.setState({
+        tasks: resp.data.tasks
+      })
+    )
+  }
+
   componentDidMount() {
     this.checkLoginStatus();
+    this.fetchTasks();
   }
 
   handleLogin(data) {
@@ -65,7 +77,7 @@ export default class App extends Component{
     if (this.state.loggedInStatus === "NOT_LOGGED_IN")
       return <Link to="/register" className="linkStyle">Register</Link>
     else if (this.state.loggedInStatus === "LOGGED_IN")
-      return <Link to="/dash" className="linkStyle">Task-board</Link>
+      return <Link to="/home" className="linkStyle">Task-board</Link>
   }
 
   renderLoginRoute() {
@@ -79,7 +91,14 @@ export default class App extends Component{
     if (this.state.loggedInStatus === "NOT_LOGGED_IN")
       return
     else if (this.state.loggedInStatus === "LOGGED_IN")
-      return <Link to="/home" className="linkStyle">My Tasks</Link>
+      return <Link to="/dash" className="linkStyle">My Tasks</Link>
+  }
+
+  renderCreateTaskRoute() {
+    if (this.state.loggedInStatus === "NOT_LOGGED_IN")
+      return
+    else if (this.state.loggedInStatus === "LOGGED_IN")
+      return <Link to="/create" className="linkStyle">Add Task</Link>
   }
 
   render() {
@@ -96,6 +115,7 @@ export default class App extends Component{
                 {this.renderRegisterRoute()}
                 {this.renderLoginRoute()}
                 {this.renderMyTaskRoute()}
+                {this.renderCreateTaskRoute()}
               </div>
             </h3>
           </div>
@@ -105,6 +125,12 @@ export default class App extends Component{
             )} />
             <Route path="/login" render={props => (
               <Login {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )} />
+            <Route path="/user" render={props => (
+              <User {... props} user={this.state.user} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+            )} />
+            <Route exact path={"/dash"} render={props => (
+              <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
             )} />
           </Switch>
         </BrowserRouter>
