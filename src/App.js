@@ -3,10 +3,12 @@ import './Header.css';
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import axios from "axios";
+import Home from './components/home';
 import Dash from './components/dash';
 import Register from './components/register';
 import Login from './components/login';
 import User from './components/user';
+import CreateTask from './components/create';
 
 export default class App extends Component{
   constructor() {
@@ -120,6 +122,9 @@ export default class App extends Component{
             </h3>
           </div>
           <Switch>
+            <Route exact path={"/"} render={props => (
+              <Home />
+            )} />
             <Route path="/register" render={props => (
               <Register {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
             )} />
@@ -131,6 +136,9 @@ export default class App extends Component{
             )} />
             <Route exact path={"/dash"} render={props => (
               <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
+            )} />
+            <Route exact path={"/create"} render={props => (
+              <CreateTask {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
             )} />
           </Switch>
         </BrowserRouter>
