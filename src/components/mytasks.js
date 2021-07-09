@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import TaskContainer from './task-container'
+import MyTaskContainer from './my-task-container'
 
 export default class MyTasks extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ export default class MyTasks extends Component {
     render() {
         return (
             <div>
-                <TaskContainer tasks={this.props.tasks} />
+                <MyTaskContainer tasks={this.props.tasks} />
             </div>
         )
     }

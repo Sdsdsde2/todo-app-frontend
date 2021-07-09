@@ -104,6 +104,12 @@ export default class App extends Component{
       return <Link to="/create" className="linkStyle">Add Task</Link>
   }
 
+  favoriteTask = (task) => {
+    fetch(`http://localhost:3000/tasks/${task.id}/users`)
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+  }
+
   render() {
   return (
     <div className="App">
@@ -133,7 +139,7 @@ export default class App extends Component{
               <Login {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
             )} />
             <Route exact path={"/dash"} render={props => (
-              <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
+              <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} favoriteTask={this.favoriteTask} />
             )} />
             <Route path="/user" render={props => (
               <User {... props} user={this.state.user} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />

@@ -9,7 +9,7 @@ export default class Dash extends Component {
     render() {
         return (
             <div>
-                <TaskContainer tasks={this.props.tasks} />
+                <TaskContainer tasks={this.props.tasks} favoriteTask={this.props.favoriteTask}/>
             </div>
         )
     }

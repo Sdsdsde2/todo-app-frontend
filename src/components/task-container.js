@@ -5,7 +5,7 @@ const TaskContainer = (props) => {
   return(
     <div id="task-collection">
         {props.tasks.map(task => {
-            return <TaskCard task={task} key={task.id} />
+            return <TaskCard task={task} key={task.id} favoriteTask={props.favoriteTask}/>
         })}
     </div>
   );

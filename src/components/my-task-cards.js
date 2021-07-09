@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
-class TaskCard extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+class MyTaskCard extends Component {
     render() {
         return (
             <div className="subsCard">
@@ -13,10 +9,9 @@ class TaskCard extends Component {
                 </div>
                 <h4 className="cardDesc">{`Description: ${this.props.task.task_info}`}</h4>
                 <h4 className="cardPriority">{`Priority: ${this.props.task.task_priority}`}</h4>
-                <button className="cardButton" onClick={() => this.props.favoriteTask(this.props.task)}>Add To My Tasks</button>
             </div>
         );
     }  
 }
 
-export default TaskCard;
+export default MyTaskCard;
