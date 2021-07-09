@@ -32,7 +32,7 @@ export default class Register extends Component {
     render() {
         return (
             <div>
-                <h1>Register</h1>
+                <h1>Create An Account</h1>
                 <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />
             </div>
         )

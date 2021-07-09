@@ -4,11 +4,6 @@ import axios from 'axios'
 export default class CreateTask extends Component {
     constructor(props) {
         super(props);
-
-    }
-
-    componentDidMount() {
-
     }
 
     submitTask(event) {
@@ -28,31 +23,28 @@ export default class CreateTask extends Component {
                 <div>
                 <form onSubmit={this.submitTask}>
                     <div>
-                        <label>Task Name:</label>
                         <input 
-                            type="taskname" 
+                            type="text" 
                             name="taskname" 
-                            placeholder="CSS Styling"
+                            placeholder="Task's name"
                             maxlength="40"
                             required 
                         />
                     </div>
                     <div>
-                        <label>Task Description:</label>
                         <textarea 
-                            type="taskdesc" 
+                            type="text" 
                             name="taskdesc" 
-                            placeholder="Change the styling of a specific button"
+                            placeholder="Brief description of the task"
                             maxlength="200"
                             required 
                         />
                     </div>
                     <div>
-                        <label>Task Priority:</label>
                         <input 
-                            type="taskpriority" 
+                            type="text" 
                             name="taskpriority" 
-                            placeholder="1-3" 
+                            placeholder="Task priority 1-3" 
                             required 
                         />
                     </div>

@@ -9,6 +9,7 @@ import Register from './components/register';
 import Login from './components/login';
 import User from './components/user';
 import CreateTask from './components/create';
+import MyTasks from './components/mytasks';
 
 export default class App extends Component{
   constructor() {
@@ -79,7 +80,7 @@ export default class App extends Component{
     if (this.state.loggedInStatus === "NOT_LOGGED_IN")
       return <Link to="/register" className="linkStyle">Register</Link>
     else if (this.state.loggedInStatus === "LOGGED_IN")
-      return <Link to="/home" className="linkStyle">Task-board</Link>
+      return <Link to="/dash" className="linkStyle">Task-board</Link>
   }
 
   renderLoginRoute() {
@@ -93,7 +94,7 @@ export default class App extends Component{
     if (this.state.loggedInStatus === "NOT_LOGGED_IN")
       return
     else if (this.state.loggedInStatus === "LOGGED_IN")
-      return <Link to="/dash" className="linkStyle">My Tasks</Link>
+      return <Link to="/mytasks" className="linkStyle">My Tasks</Link>
   }
 
   renderCreateTaskRoute() {
@@ -110,7 +111,7 @@ export default class App extends Component{
         <BrowserRouter>
           <div className="header">
             <h1 className="headerMain">
-                <Link to="/" className="headerMain">Basic To-do App</Link>
+                <Link to="/" className="headerMain">Simple To-do App</Link>
             </h1>
             <h3>
               <div className="headerLink">
@@ -131,11 +132,14 @@ export default class App extends Component{
             <Route path="/login" render={props => (
               <Login {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
             )} />
+            <Route exact path={"/dash"} render={props => (
+              <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
+            )} />
             <Route path="/user" render={props => (
               <User {... props} user={this.state.user} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
             )} />
-            <Route exact path={"/dash"} render={props => (
-              <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
+            <Route exact path={"/mytasks"} render={props => (
+              <MyTasks {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
             )} />
             <Route exact path={"/create"} render={props => (
               <CreateTask {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />

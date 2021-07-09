@@ -45,30 +45,37 @@ export default class Registration extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    <div>
                     <input 
-                        type="first_name" 
+                        type="text" 
                         name="first_name" 
                         placeholder="First Name" 
                         value={this.state.first_name} 
                         onChange={this.handleChange} 
                         required 
                     />
+                    </div>
+                    <div>
                     <input 
-                        type="last_name" 
+                        type="text" 
                         name="last_name" 
                         placeholder="Last Name" 
                         value={this.state.last_name} 
                         onChange={this.handleChange} 
                         required 
                     />
+                    </div>
+                    <div>
                     <input 
-                        type="username" 
+                        type="text" 
                         name="username" 
                         placeholder="Username" 
                         value={this.state.username} 
                         onChange={this.handleChange} 
                         required 
                     />
+                    </div>
+                    <div>
                     <input 
                         type="password" 
                         name="password" 
@@ -77,6 +84,8 @@ export default class Registration extends Component {
                         onChange={this.handleChange} 
                         required 
                     />
+                    </div>
+                    <div>
                     <input 
                         type="password" 
                         name="password_confirmation" 
@@ -85,6 +94,7 @@ export default class Registration extends Component {
                         onChange={this.handleChange} 
                         required 
                     />
+                    </div>
                     <button type="submit">Register</button>
                 </form>
             </div>

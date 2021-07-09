@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import TaskContainer from './task-container'
 
-export default class Dash extends Component {
+export default class MyTasks extends Component {
     constructor(props) {
         super(props);
     }
