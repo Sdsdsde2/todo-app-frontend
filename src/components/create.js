@@ -27,7 +27,7 @@ export default class CreateTask extends Component {
                             type="text" 
                             name="taskname" 
                             placeholder="Task's name"
-                            maxlength="40"
+                            maxLength="40"
                             required 
                         />
                     </div>
@@ -36,7 +36,7 @@ export default class CreateTask extends Component {
                             type="text" 
                             name="taskdesc" 
                             placeholder="Brief description of the task"
-                            maxlength="200"
+                            maxLength="200"
                             required 
                         />
                     </div>

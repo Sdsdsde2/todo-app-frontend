@@ -10,7 +10,7 @@ export default class MyTasks extends Component {
     render() {
         return (
             <div>
-                <MyTaskContainer tasks={this.props.tasks} />
+                <MyTaskContainer tasks={this.props.tasks} user={this.props.user} />
             </div>
         )
     }

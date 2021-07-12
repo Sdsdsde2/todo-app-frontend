@@ -18,7 +18,8 @@ export default class App extends Component{
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
-      tasks: {}
+      tasks: {},
+      taskUsers: []
     }
 
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
@@ -105,9 +106,19 @@ export default class App extends Component{
   }
 
   favoriteTask = (task) => {
-    fetch(`http://localhost:3000/tasks/${task.id}/users`)
-    .then(resp => resp.json())
-    .then(data => console.log(data))
+    var tasksuser = {
+      user_id: this.state.user.id,
+      task_id: task.id
+    }
+
+    fetch(`http://localhost:3000/tasksusers`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": 'application/json',
+        "Accept": 'application/json'
+      },
+      body: JSON.stringify(tasksuser)
+    })
   }
 
   render() {
@@ -145,7 +156,7 @@ export default class App extends Component{
               <User {... props} user={this.state.user} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
             )} />
             <Route exact path={"/mytasks"} render={props => (
-              <MyTasks {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
+              <MyTasks {... props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />
             )} />
             <Route exact path={"/create"} render={props => (
               <CreateTask {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
