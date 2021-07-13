@@ -31,14 +31,14 @@ code {
   background-color: #b62be1;
   border-bottom: rgb(0, 0, 0) solid 2px;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 19px;
   height: 5rem;
 }
 
 .cardDesc {
   text-align: center;
   color: white;
-  font-size: 14px;
+  font-size: 13px;
   margin-top: -8%;
 }
 
@@ -99,6 +99,15 @@ label {
 }
 
 button[type=submit] {
+  background-color: #58196b;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.signoutBtn {
   background-color: #58196b;
   color: white;
   padding: 12px 20px;

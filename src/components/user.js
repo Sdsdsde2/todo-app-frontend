@@ -26,12 +26,18 @@ export default class User extends Component {
 
     logoutButton() {
         if (this.props.loggedInStatus === "LOGGED_IN")
-            return <button onClick={() => this.handleLogoutClick()}>Logout</button>
+            return <button className="signoutBtn" onClick={() => this.handleLogoutClick()}>Logout</button>
     }
 
+    checkLogin() {
+        if (this.props.loggedInStatus === "NOT_LOGGED_IN")
+            this.props.history.push("/login");
+    }
+    
     render() {
         return (
             <div>
+                {this.checkLogin()}
                 <h1>Account Information</h1>
                 <h3>Name: {this.props.user.first_name + ' ' + this.props.user.last_name}</h3>
                 <h3>Username: {this.props.user.username}</h3>

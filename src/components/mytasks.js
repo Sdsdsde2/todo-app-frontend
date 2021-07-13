@@ -7,6 +7,11 @@ export default class MyTasks extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        if (this.props.loggedInStatus === "NOT_LOGGED_IN")
+            this.props.history.push("/login");
+    }
+
     render() {
         return (
             <div>

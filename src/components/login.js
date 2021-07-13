@@ -12,7 +12,7 @@ export default class LoginPage extends Component {
 
     handleSuccessfulAuth(data) {
         this.props.handleLogin(data);
-        this.props.history.push("/home");
+        this.props.history.push("/user");
     }
 
     handleLogoutClick() {
@@ -26,7 +26,7 @@ export default class LoginPage extends Component {
 
     logoutButton() {
         if (this.props.loggedInStatus === "LOGGED_IN")
-            return <button onClick={() => this.handleLogoutClick()}>Logout</button>
+            return <button className="signoutBtn" onClick={() => this.handleLogoutClick()}>Logout</button>
     }
 
     render() {

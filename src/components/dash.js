@@ -6,10 +6,17 @@ export default class Dash extends Component {
         super(props);
     }
 
+    checkLogin() {
+        if (this.props.loggedInStatus === "LOGGED_IN")
+            return <TaskContainer tasks={this.props.tasks} favoriteTask={this.props.favoriteTask}/>
+        if (this.props.loggedInStatus === "NOT_LOGGED_IN")
+            this.props.history.push("/login");
+    }
+
     render() {
         return (
             <div>
-                <TaskContainer tasks={this.props.tasks} favoriteTask={this.props.favoriteTask}/>
+                {this.checkLogin()}
             </div>
         )
     }

@@ -16,9 +16,15 @@ export default class CreateTask extends Component {
         {withCredentials: true})
     }
 
+    checkLogin() {
+        if (this.props.loggedInStatus === "NOT_LOGGED_IN")
+            this.props.history.push("/login");
+    }
+
     render() {
         return (
             <div>
+                {this.checkLogin()}
                 <h1>Create A New Task</h1>
                 <div>
                 <form onSubmit={this.submitTask}>

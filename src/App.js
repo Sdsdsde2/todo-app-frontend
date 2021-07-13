@@ -18,8 +18,7 @@ export default class App extends Component{
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
-      tasks: {},
-      taskUsers: []
+      tasks: {}
     }
 
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
@@ -35,16 +34,17 @@ export default class App extends Component{
   checkLoginStatus() {
     axios.get("http://localhost:3000/logged_in", { withCredentials: true })
     .then(resp => {
-      if (resp.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN")
+      if (resp.data.logged_in && this.state.loggedInStatus === "LOGGED_IN")
         this.setState({
           loggedInStatus: "LOGGED_IN",
           user: resp.data.user
         })
-      else if (!resp.data.logged_in && this.state.loggedInStatus === "LOGGED_IN") {
+      else if (!resp.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN") {
         this.setState({
           loggedInStatus: "NOT_LOGGED_IN",
           user: {}
         })
+        this.props.history.push("/login");
       }
     })
     .catch(error => console.log("Login error", error))
@@ -119,6 +119,8 @@ export default class App extends Component{
       },
       body: JSON.stringify(tasksuser)
     })
+
+    this.checkLoginStatus()
   }
 
   render() {
