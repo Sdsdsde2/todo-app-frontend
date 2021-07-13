@@ -18,7 +18,8 @@ export default class App extends Component{
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
-      tasks: {}
+      tasks: {},
+      userTasks: {}
     }
 
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
@@ -66,7 +67,8 @@ export default class App extends Component{
   handleLogin(data) {
     this.setState({
       loggedInStatus: "LOGGED_IN",
-      user: data.user
+      user: data.user,
+      userTasks: data.user.tasks
     })
   }
 
@@ -119,8 +121,18 @@ export default class App extends Component{
       },
       body: JSON.stringify(tasksuser)
     })
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      userTasks: [...this.state.userTasks, task]
+    })
+    )
+  }
 
-    this.checkLoginStatus()
+  removeTask = (taskuser) => {
+    fetch(`http://localhost:3000/tasksusers/${taskuser.id}`, {method: 'DELETE'})
+    this.setState({
+      userTasks: this.state.userTasks.filter((userTask)=>{ return userTask.id !== taskuser.task_id})
+    })
   }
 
   render() {
@@ -146,19 +158,19 @@ export default class App extends Component{
               <Home />
             )} />
             <Route path="/register" render={props => (
-              <Register {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+              <Register {... props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
             )} />
             <Route path="/login" render={props => (
-              <Login {... props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
+              <Login {... props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
             )} />
             <Route exact path={"/dash"} render={props => (
-              <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} favoriteTask={this.favoriteTask} />
+              <Dash {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} favoriteTask={this.favoriteTask} fetchTasks={this.fetchTasks} />
             )} />
             <Route path="/user" render={props => (
               <User {... props} user={this.state.user} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />
             )} />
             <Route exact path={"/mytasks"} render={props => (
-              <MyTasks {... props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} />
+              <MyTasks {... props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} userTasks={this.state.userTasks} checkLogin={this.checkLoginStatus} removeTask={this.removeTask} />
             )} />
             <Route exact path={"/create"} render={props => (
               <CreateTask {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
