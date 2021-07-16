@@ -12,8 +12,7 @@ export default class CreateTask extends Component {
             task_title: event.target[0].value,
             task_info: event.target[1].value,
             task_priority: event.target[2].value
-        },
-        {withCredentials: true})
+        }, {withCredentials: true})
     }
 
     checkLogin() {

@@ -13,6 +13,10 @@ export default class Dash extends Component {
             this.props.history.push("/login");
     }
 
+    componentDidMount() {
+        this.props.fetchTasks()
+    }
+
     render() {
         return (
             <div>

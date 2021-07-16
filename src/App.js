@@ -51,12 +51,11 @@ export default class App extends Component{
     .catch(error => console.log("Login error", error))
   }
 
-  fetchTasks() {
+  fetchTasks = () => {
     axios.get("http://localhost:3000/tasks")
-    .then(resp => this.setState({
-        tasks: resp.data.tasks
-      })
-    )
+    .then(resp => {
+      return this.setState({tasks: resp.data.tasks})
+    })
   }
 
   componentDidMount() {
@@ -107,6 +106,12 @@ export default class App extends Component{
       return <Link to="/create" className="linkStyle">Add Task</Link>
   }
 
+  renderNewTask(newTask) {
+    this.setState({
+      tasls: [...this.state.tasks, newTask]
+    })
+  }
+
   favoriteTask = (task) => {
     var tasksuser = {
       user_id: this.state.user.id,
@@ -133,6 +138,13 @@ export default class App extends Component{
     this.setState({
       userTasks: this.state.userTasks.filter((userTask)=>{ return userTask.id !== taskuser.task_id})
     })
+  }
+
+  getTasks = () => {
+    axios.get("http://localhost:3000/tasks")
+    .then(resp => this.setState({
+      tasks: resp.data.tasks
+    }))
   }
 
   render() {
@@ -173,7 +185,7 @@ export default class App extends Component{
               <MyTasks {... props} loggedInStatus={this.state.loggedInStatus} user={this.state.user} userTasks={this.state.userTasks} checkLogin={this.checkLoginStatus} removeTask={this.removeTask} />
             )} />
             <Route exact path={"/create"} render={props => (
-              <CreateTask {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} />
+              <CreateTask {... props} loggedInStatus={this.state.loggedInStatus} tasks={this.state.tasks} newTask={this.renderNewTask} />
             )} />
           </Switch>
         </BrowserRouter>
